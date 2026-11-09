@@ -1,0 +1,314 @@
+{
+  "timestamp": "2026-11-09T13:30:17Z",
+  "model_metadata": {
+    "model_name": "Gemma-4-E2B",
+    "model_path": "N/A (Mock/Validation Engine)",
+    "quantization": "Q4_K_M",
+    "temperature": 0.0,
+    "context_window": 4096,
+    "backend": "mock",
+    "is_mock": true
+  },
+  "sample_size": 3,
+  "budget": 2048,
+  "elapsed_seconds": 0.01,
+  "aggregated_metrics": {
+    "json": {
+      "sample_size": 3,
+      "acc_at_1": 1.0,
+      "acc_at_5": 1.0,
+      "mrr_at_5": 1.0,
+      "candidate_coverage": 1.0,
+      "conditional_acc_at_1": 1.0,
+      "conditional_acc_at_5": 1.0,
+      "covered_tasks": 3,
+      "avg_token_count": 686.7
+    },
+    "adjacency_list": {
+      "sample_size": 3,
+      "acc_at_1": 0.0,
+      "acc_at_5": 0.0,
+      "mrr_at_5": 0.0,
+      "candidate_coverage": 1.0,
+      "conditional_acc_at_1": 0.0,
+      "conditional_acc_at_5": 0.0,
+      "covered_tasks": 3,
+      "avg_token_count": 313.7
+    },
+    "natural_language": {
+      "sample_size": 3,
+      "acc_at_1": 1.0,
+      "acc_at_5": 1.0,
+      "mrr_at_5": 1.0,
+      "candidate_coverage": 1.0,
+      "conditional_acc_at_1": 1.0,
+      "conditional_acc_at_5": 1.0,
+      "covered_tasks": 3,
+      "avg_token_count": 319.7
+    }
+  },
+  "task_level_records": [
+    {
+      "task_id": "flask__flask-4045",
+      "results": {
+        "json": {
+          "task_id": "flask__flask-4045",
+          "format_type": "json",
+          "budget": 2048,
+          "acc_at_1": 1.0,
+          "acc_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 1.0,
+          "gold_files": [
+            "src/flask/blueprints.py",
+            "src/flask/app.py"
+          ],
+          "predicted_files": [
+            "src/flask/app.py",
+            "src/flask/blueprints.py",
+            "src/flask/helpers.py",
+            "src/flask/scaffold.py",
+            "src/flask/wrappers.py"
+          ],
+          "candidate_files": [
+            "src/flask/app.py",
+            "src/flask/blueprints.py",
+            "src/flask/helpers.py",
+            "src/flask/scaffold.py",
+            "src/flask/wrappers.py"
+          ],
+          "token_count": 635
+        },
+        "adjacency_list": {
+          "task_id": "flask__flask-4045",
+          "format_type": "adjacency_list",
+          "budget": 2048,
+          "acc_at_1": 0.0,
+          "acc_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 0.0,
+          "gold_files": [
+            "src/flask/blueprints.py",
+            "src/flask/app.py"
+          ],
+          "predicted_files": [
+            "src/flask/core.py",
+            "flask/app.py"
+          ],
+          "candidate_files": [
+            "src/flask/app.py",
+            "src/flask/blueprints.py",
+            "src/flask/helpers.py",
+            "src/flask/scaffold.py",
+            "src/flask/wrappers.py"
+          ],
+          "token_count": 289
+        },
+        "natural_language": {
+          "task_id": "flask__flask-4045",
+          "format_type": "natural_language",
+          "budget": 2048,
+          "acc_at_1": 1.0,
+          "acc_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 1.0,
+          "gold_files": [
+            "src/flask/blueprints.py",
+            "src/flask/app.py"
+          ],
+          "predicted_files": [
+            "src/flask/app.py",
+            "src/flask/blueprints.py",
+            "src/flask/helpers.py",
+            "src/flask/scaffold.py",
+            "src/flask/wrappers.py"
+          ],
+          "candidate_files": [
+            "src/flask/app.py",
+            "src/flask/blueprints.py",
+            "src/flask/helpers.py",
+            "src/flask/scaffold.py",
+            "src/flask/wrappers.py"
+          ],
+          "token_count": 296
+        }
+      }
+    },
+    {
+      "task_id": "requests__requests-3367",
+      "results": {
+        "json": {
+          "task_id": "requests__requests-3367",
+          "format_type": "json",
+          "budget": 2048,
+          "acc_at_1": 1.0,
+          "acc_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 1.0,
+          "gold_files": [
+            "requests/adapters.py",
+            "requests/sessions.py"
+          ],
+          "predicted_files": [
+            "requests/adapters.py",
+            "requests/exceptions.py",
+            "requests/models.py",
+            "requests/sessions.py"
+          ],
+          "candidate_files": [
+            "requests/adapters.py",
+            "requests/exceptions.py",
+            "requests/models.py",
+            "requests/sessions.py"
+          ],
+          "token_count": 576
+        },
+        "adjacency_list": {
+          "task_id": "requests__requests-3367",
+          "format_type": "adjacency_list",
+          "budget": 2048,
+          "acc_at_1": 0.0,
+          "acc_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 0.0,
+          "gold_files": [
+            "requests/adapters.py",
+            "requests/sessions.py"
+          ],
+          "predicted_files": [
+            "src/requests/core.py",
+            "requests/app.py"
+          ],
+          "candidate_files": [
+            "requests/adapters.py",
+            "requests/exceptions.py",
+            "requests/models.py",
+            "requests/sessions.py"
+          ],
+          "token_count": 266
+        },
+        "natural_language": {
+          "task_id": "requests__requests-3367",
+          "format_type": "natural_language",
+          "budget": 2048,
+          "acc_at_1": 1.0,
+          "acc_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 1.0,
+          "gold_files": [
+            "requests/adapters.py",
+            "requests/sessions.py"
+          ],
+          "predicted_files": [
+            "requests/adapters.py",
+            "requests/exceptions.py",
+            "requests/models.py",
+            "requests/sessions.py"
+          ],
+          "candidate_files": [
+            "requests/adapters.py",
+            "requests/exceptions.py",
+            "requests/models.py",
+            "requests/sessions.py"
+          ],
+          "token_count": 265
+        }
+      }
+    },
+    {
+      "task_id": "django__django-14787",
+      "results": {
+        "json": {
+          "task_id": "django__django-14787",
+          "format_type": "json",
+          "budget": 2048,
+          "acc_at_1": 1.0,
+          "acc_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 1.0,
+          "gold_files": [
+            "django/utils/decorators.py"
+          ],
+          "predicted_files": [
+            "django/utils/decorators.py",
+            "django/utils/functional.py",
+            "django/views/generic/base.py",
+            "sklearn/base.py",
+            "sklearn/model_selection/_search.py"
+          ],
+          "candidate_files": [
+            "django/utils/decorators.py",
+            "django/utils/functional.py",
+            "django/views/generic/base.py",
+            "sklearn/base.py",
+            "sklearn/model_selection/_search.py",
+            "sklearn/pipeline.py"
+          ],
+          "token_count": 849
+        },
+        "adjacency_list": {
+          "task_id": "django__django-14787",
+          "format_type": "adjacency_list",
+          "budget": 2048,
+          "acc_at_1": 0.0,
+          "acc_at_5": 0.0,
+          "mrr_at_5": 0.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 0.0,
+          "gold_files": [
+            "django/utils/decorators.py"
+          ],
+          "predicted_files": [
+            "src/django/core.py",
+            "django/app.py"
+          ],
+          "candidate_files": [
+            "django/utils/decorators.py",
+            "django/utils/functional.py",
+            "django/views/generic/base.py",
+            "sklearn/base.py",
+            "sklearn/model_selection/_search.py",
+            "sklearn/pipeline.py"
+          ],
+          "token_count": 386
+        },
+        "natural_language": {
+          "task_id": "django__django-14787",
+          "format_type": "natural_language",
+          "budget": 2048,
+          "acc_at_1": 1.0,
+          "acc_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "candidate_coverage": 1.0,
+          "conditional_acc_1": 1.0,
+          "gold_files": [
+            "django/utils/decorators.py"
+          ],
+          "predicted_files": [
+            "django/utils/decorators.py",
+            "django/utils/functional.py",
+            "django/views/generic/base.py",
+            "sklearn/base.py",
+            "sklearn/model_selection/_search.py"
+          ],
+          "candidate_files": [
+            "django/utils/decorators.py",
+            "django/utils/functional.py",
+            "django/views/generic/base.py",
+            "sklearn/base.py",
+            "sklearn/model_selection/_search.py",
+            "sklearn/pipeline.py"
+          ],
+          "token_count": 398
+        }
+      }
+    }
+  ]
+}

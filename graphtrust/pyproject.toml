@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graphtrust"
+version = "0.1.0"
+description = "Same Subgraph, Different Story: Does Graph Serialization Change Code Understanding in Small Gemma Agents?"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+    "pydantic>=2.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0"
+]
+inference = [
+    "llama-cpp-python>=0.2.0"
+]
+
+[project.scripts]
+graphtrust = "graphtrust.cli:main"

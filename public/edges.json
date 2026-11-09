@@ -1,0 +1,112 @@
+[
+  {
+    "source": "flask_bp_init",
+    "target": "flask_scaffold",
+    "type": "inherits"
+  },
+  {
+    "source": "flask_app_register_bp",
+    "target": "flask_bp_add_url_rule",
+    "type": "calls"
+  },
+  {
+    "source": "flask_bp_add_url_rule",
+    "target": "flask_helpers_url_for",
+    "type": "registers_endpoint"
+  },
+  {
+    "source": "flask_helpers_url_for",
+    "target": "flask_routing_map",
+    "type": "queries"
+  },
+  {
+    "source": "flask_app_register_bp",
+    "target": "flask_scaffold",
+    "type": "delegates"
+  },
+  {
+    "source": "req_session_send",
+    "target": "req_adapter_send",
+    "type": "calls"
+  },
+  {
+    "source": "req_adapter_send",
+    "target": "req_adapter_build_response",
+    "type": "calls"
+  },
+  {
+    "source": "req_adapter_build_response",
+    "target": "req_response_close",
+    "type": "manages_lifecycle"
+  },
+  {
+    "source": "req_adapter_send",
+    "target": "req_exceptions_decode",
+    "type": "raises"
+  },
+  {
+    "source": "req_session_send",
+    "target": "req_response_close",
+    "type": "closes"
+  },
+  {
+    "source": "django_method_decorator",
+    "target": "django_update_method_wrapper",
+    "type": "calls"
+  },
+  {
+    "source": "django_update_method_wrapper",
+    "target": "django_functools_partial",
+    "type": "inspects"
+  },
+  {
+    "source": "django_view_dispatch",
+    "target": "django_method_decorator",
+    "type": "decorated_by"
+  },
+  {
+    "source": "fastapi_run_endpoint",
+    "target": "fastapi_solve_dependencies",
+    "type": "calls"
+  },
+  {
+    "source": "fastapi_solve_dependencies",
+    "target": "fastapi_param_sub_dep",
+    "type": "evaluates"
+  },
+  {
+    "source": "fastapi_route_compile",
+    "target": "fastapi_run_endpoint",
+    "type": "dispatches"
+  },
+  {
+    "source": "pytest_runtest_setup",
+    "target": "pytest_tc_function",
+    "type": "prepares"
+  },
+  {
+    "source": "pytest_tc_function",
+    "target": "pytest_makereport",
+    "type": "reports_to"
+  },
+  {
+    "source": "pytest_unittest_setup",
+    "target": "pytest_tc_function",
+    "type": "instantiates"
+  },
+  {
+    "source": "sklearn_pipeline_len",
+    "target": "sklearn_base_composition",
+    "type": "implements_protocol"
+  },
+  {
+    "source": "sklearn_pipeline_fit",
+    "target": "sklearn_pipeline_len",
+    "type": "verifies"
+  },
+  {
+    "source": "sklearn_grid_search",
+    "target": "sklearn_pipeline_fit",
+    "type": "invokes"
+  }
+]

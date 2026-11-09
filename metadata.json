@@ -1,0 +1,6 @@
+{
+  "name": "GraphTrust: Code Graph Serialization Research Platform",
+  "description": "Controlled empirical research workbench investigating code graph serialization effects on small Gemma agents (JSON vs Adjacency List vs Natural Language).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

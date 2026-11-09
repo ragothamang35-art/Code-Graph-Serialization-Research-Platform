@@ -1,0 +1,191 @@
+[
+  {
+    "id": "flask_bp_add_url_rule",
+    "name": "Blueprint.add_url_rule",
+    "text": "Register a rule with the blueprint and prefix url endpoint with blueprint name.",
+    "file": "src/flask/blueprints.py",
+    "line": 78
+  },
+  {
+    "id": "flask_bp_init",
+    "name": "Blueprint.__init__",
+    "text": "Initialize a Blueprint scaffold instance with name and import_name.",
+    "file": "src/flask/blueprints.py",
+    "line": 45
+  },
+  {
+    "id": "flask_app_register_bp",
+    "name": "Flask.register_blueprint",
+    "text": "Register a blueprint on this application and record deferred setup functions.",
+    "file": "src/flask/app.py",
+    "line": 1010
+  },
+  {
+    "id": "flask_scaffold",
+    "name": "Scaffold",
+    "text": "Common behavior between Flask application object and Blueprint object.",
+    "file": "src/flask/scaffold.py",
+    "line": 32
+  },
+  {
+    "id": "flask_helpers_url_for",
+    "name": "url_for",
+    "text": "Generates a URL to the given endpoint with the given values.",
+    "file": "src/flask/helpers.py",
+    "line": 280
+  },
+  {
+    "id": "flask_routing_map",
+    "name": "MapAdapter.match",
+    "text": "Matches request path against registered URL routing map rules.",
+    "file": "src/flask/wrappers.py",
+    "line": 115
+  },
+  {
+    "id": "req_adapter_build_response",
+    "name": "HTTPAdapter.build_response",
+    "text": "Builds a Response object from a urllib3 response payload.",
+    "file": "requests/adapters.py",
+    "line": 210
+  },
+  {
+    "id": "req_adapter_send",
+    "name": "HTTPAdapter.send",
+    "text": "Sends PreparedRequest object and handles transport exceptions and socket lifecycle.",
+    "file": "requests/adapters.py",
+    "line": 400
+  },
+  {
+    "id": "req_session_send",
+    "name": "Session.send",
+    "text": "Send a given PreparedRequest and return Response with connection adapter resolution.",
+    "file": "requests/sessions.py",
+    "line": 615
+  },
+  {
+    "id": "req_response_close",
+    "name": "Response.close",
+    "text": "Releases the connection back to the pool and closes underlying urllib3 stream.",
+    "file": "requests/models.py",
+    "line": 850
+  },
+  {
+    "id": "req_exceptions_decode",
+    "name": "ContentDecodingError",
+    "text": "Failed to decode response content due to compression or chunked framing failure.",
+    "file": "requests/exceptions.py",
+    "line": 65
+  },
+  {
+    "id": "django_update_method_wrapper",
+    "name": "_update_method_wrapper",
+    "text": "Copy method attributes and update __name__ and __doc__ onto decorated wrapper.",
+    "file": "django/utils/decorators.py",
+    "line": 35
+  },
+  {
+    "id": "django_method_decorator",
+    "name": "method_decorator",
+    "text": "Converts a function decorator into a method decorator on class or instance.",
+    "file": "django/utils/decorators.py",
+    "line": 65
+  },
+  {
+    "id": "django_functools_partial",
+    "name": "functools.partial",
+    "text": "Return a new partial object which when called behaves like func with args.",
+    "file": "django/utils/functional.py",
+    "line": 120
+  },
+  {
+    "id": "django_view_dispatch",
+    "name": "View.dispatch",
+    "text": "Delegate HTTP request method to get, post, put, etc.",
+    "file": "django/views/generic/base.py",
+    "line": 95
+  },
+  {
+    "id": "fastapi_param_sub_dep",
+    "name": "get_param_sub_dependant",
+    "text": "Construct nested parameter dependant hierarchy with deterministic cache key.",
+    "file": "fastapi/dependencies/utils.py",
+    "line": 180
+  },
+  {
+    "id": "fastapi_solve_dependencies",
+    "name": "solve_dependencies",
+    "text": "Resolve dependency injection tree values and evaluate async sub-dependencies.",
+    "file": "fastapi/dependencies/utils.py",
+    "line": 490
+  },
+  {
+    "id": "fastapi_run_endpoint",
+    "name": "run_endpoint_function",
+    "text": "Execute route handler with solved dependencies and validate output model.",
+    "file": "fastapi/routing.py",
+    "line": 135
+  },
+  {
+    "id": "fastapi_route_compile",
+    "name": "APIRoute.get_route_handler",
+    "text": "Compile dependency tree into single ASGI callable handler.",
+    "file": "fastapi/routing.py",
+    "line": 280
+  },
+  {
+    "id": "pytest_tc_function",
+    "name": "TestCaseFunction.runtest",
+    "text": "Run unittest.TestCase test method and invoke doCleanups teardown hooks.",
+    "file": "src/_pytest/unittest.py",
+    "line": 205
+  },
+  {
+    "id": "pytest_unittest_setup",
+    "name": "pytest_pycollect_makeitem",
+    "text": "Collect unittest TestCase subclasses and map individual test methods.",
+    "file": "src/_pytest/unittest.py",
+    "line": 90
+  },
+  {
+    "id": "pytest_runtest_setup",
+    "name": "pytest_runtest_setup",
+    "text": "Execute fixture setup phase and capture SkipTest or test failures.",
+    "file": "src/_pytest/runner.py",
+    "line": 290
+  },
+  {
+    "id": "pytest_makereport",
+    "name": "pytest_runtest_makereport",
+    "text": "Construct TestReport object summarizing call outcome, duration and traceback.",
+    "file": "src/_pytest/runner.py",
+    "line": 340
+  },
+  {
+    "id": "sklearn_pipeline_len",
+    "name": "Pipeline.__len__",
+    "text": "Return the count of transformers and estimator in the pipeline chain.",
+    "file": "sklearn/pipeline.py",
+    "line": 135
+  },
+  {
+    "id": "sklearn_pipeline_fit",
+    "name": "Pipeline.fit",
+    "text": "Fit all transforms sequentially and transform the data before final estimator fit.",
+    "file": "sklearn/pipeline.py",
+    "line": 250
+  },
+  {
+    "id": "sklearn_base_composition",
+    "name": "_BaseComposition",
+    "text": "Base class for meta-estimators and composite models with parameter inspection.",
+    "file": "sklearn/base.py",
+    "line": 85
+  },
+  {
+    "id": "sklearn_grid_search",
+    "name": "GridSearchCV.fit",
+    "text": "Run grid search with cross-validation over pipeline parameter candidates.",
+    "file": "sklearn/model_selection/_search.py",
+    "line": 520
+  }
+]

@@ -1,0 +1,48 @@
+# GraphTrust Default Configuration
+
+project:
+  name: "GraphTrust"
+  version: "0.1.0"
+  description: "Controlled empirical evaluation of code graph serialization formats in small Gemma agents."
+
+data:
+  raw_dir: "graphtrust/data/raw"
+  processed_dir: "graphtrust/data/processed"
+  tasks_file: "tasks.json"
+  nodes_file: "nodes.json"
+  edges_file: "edges.json"
+  embeddings_file: "embeddings.json"
+
+retrieval:
+  max_depth: 2
+  use_embeddings: true
+  top_k_embedding_nodes: 2
+  embedding_sim_threshold: 0.4
+  max_total_nodes: 15
+
+serialization:
+  formats:
+    - "json"
+    - "adjacency_list"
+    - "natural_language"
+  baselines:
+    - "no_graph"
+    - "keyword_match"
+  token_budgets:
+    - 512
+    - 1024
+    - 2048
+    - 4096
+
+model:
+  name: "Gemma-4-E2B"
+  quantization: "Q4_K_M"
+  temperature: 0.0
+  context_window: 4096
+  max_output_tokens: 256
+  is_mock: true
+
+output:
+  dir: "graphtrust/outputs"
+  save_predictions: true
+  save_metrics: true

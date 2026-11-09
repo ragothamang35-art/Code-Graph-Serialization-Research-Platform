@@ -1,0 +1,82 @@
+[
+  {
+    "instance_id": "flask__flask-4045",
+    "repo": "pallets/flask",
+    "base_commit": "e8913b4",
+    "created_at": "2023-04-12T10:00:00Z",
+    "problem_statement": "Blueprint name collision when registering nested blueprints with same endpoint prefix. Blueprint.add_url_rule fails to check if the blueprint name contains dots, leading to ambiguous routing resolution in url_for when nested blueprints share leaf names.",
+    "hints_text": "Check blueprint.py line 78 in add_url_rule and app.py register_blueprint endpoint prefix handling.",
+    "patch": "diff --git a/src/flask/blueprints.py b/src/flask/blueprints.py\n--- a/src/flask/blueprints.py\n+++ b/src/flask/blueprints.py\n@@ -190,6 +190,9 @@ class Blueprint(Scaffold):\n+        if \".\" in self.name:\n+            raise ValueError(f\"Blueprint name '{self.name}' may not contain a dot '.'\")\n         self.name = name\ndiff --git a/src/flask/app.py b/src/flask/app.py\n--- a/src/flask/app.py\n+++ b/src/flask/app.py\n@@ -1020,4 +1020,7 @@ class Flask(Scaffold):\n+        first_bp = self.blueprints.get(blueprint.name)\n+        if first_bp is not None and first_bp is not blueprint:\n+            raise AssertionError(f\"A name collision occurred between blueprints {blueprint!r} and {first_bp!r}\")\n",
+    "test_patch": "diff --git a/tests/test_blueprints.py b/tests/test_blueprints.py\n--- a/tests/test_blueprints.py\n+++ b/tests/test_blueprints.py\n@@ -50,4 +50,12 @@ def test_nested_blueprint_dot_name():\n",
+    "gold_files": [
+      "src/flask/blueprints.py",
+      "src/flask/app.py"
+    ]
+  },
+  {
+    "instance_id": "requests__requests-3367",
+    "repo": "psf/requests",
+    "base_commit": "9bc1210",
+    "created_at": "2023-05-18T14:20:00Z",
+    "problem_statement": "Session.send does not properly close streaming responses when Content-Length mismatch causes an IncompleteRead or chunked decoding error in HTTPAdapter.build_response.",
+    "hints_text": "Make sure response.raw.close() is called inside HTTPAdapter when urllib3 raises ProtocolError or IncompleteRead.",
+    "patch": "diff --git a/requests/adapters.py b/requests/adapters.py\n--- a/requests/adapters.py\n+++ b/requests/adapters.py\n@@ -415,6 +415,8 @@ class HTTPAdapter(BaseAdapter):\n         except (ProtocolError, DecodeError) as err:\n+            response.raw.close()\n             raise ContentDecodingError(err, response=response)\ndiff --git a/requests/sessions.py b/requests/sessions.py\n--- a/requests/sessions.py\n+++ b/requests/sessions.py\n@@ -620,3 +620,6 @@ class Session(SessionRedirectMixin):\n+        if getattr(resp.raw, '_pool', None) and not resp.is_closed:\n+            resp.close()\n",
+    "test_patch": "diff --git a/tests/test_requests.py b/tests/test_requests.py\n--- a/tests/test_requests.py\n+++ b/tests/test_requests.py\n",
+    "gold_files": [
+      "requests/adapters.py",
+      "requests/sessions.py"
+    ]
+  },
+  {
+    "instance_id": "django__django-14787",
+    "repo": "django/django",
+    "base_commit": "4a51e60",
+    "created_at": "2023-06-02T08:15:00Z",
+    "problem_statement": "method_decorator preservation of function attributes and wrapper __name__ breaks for partial functions and multi-decorator wraps in utils/decorators.py.",
+    "hints_text": "Check functools.update_wrapper or _update_method_wrapper in django/utils/decorators.py line 38.",
+    "patch": "diff --git a/django/utils/decorators.py b/django/utils/decorators.py\n--- a/django/utils/decorators.py\n+++ b/django/utils/decorators.py\n@@ -38,6 +38,9 @@ def _update_method_wrapper(_wrapper, method):\n+    if isinstance(method, functools.partial):\n+        method = method.func\n+    update_wrapper(_wrapper, method)\n",
+    "test_patch": "diff --git a/tests/decorators/tests.py b/tests/decorators/tests.py\n",
+    "gold_files": [
+      "django/utils/decorators.py"
+    ]
+  },
+  {
+    "instance_id": "fastapi__fastapi-2194",
+    "repo": "tiangolo/fastapi",
+    "base_commit": "782ca51",
+    "created_at": "2023-07-10T11:45:00Z",
+    "problem_statement": "Dependency cache key collision when two distinct sub-dependencies share identical function signatures or default arguments in routing.solve_dependencies.",
+    "hints_text": "Look into dependant.cache_key in dependencies/utils.py and routing.py.",
+    "patch": "diff --git a/fastapi/dependencies/utils.py b/fastapi/dependencies/utils.py\n--- a/fastapi/dependencies/utils.py\n+++ b/fastapi/dependencies/utils.py\n@@ -188,4 +188,7 @@ def get_param_sub_dependant(param, dependant):\n+    cache_key = (call, tuple(sorted(param.items())))\n+    sub_dependant.cache_key = cache_key\ndiff --git a/fastapi/routing.py b/fastapi/routing.py\n--- a/fastapi/routing.py\n+++ b/fastapi/routing.py\n@@ -140,3 +140,5 @@ async def run_endpoint_function(dependant, values):\n",
+    "gold_files": [
+      "fastapi/dependencies/utils.py",
+      "fastapi/routing.py"
+    ]
+  },
+  {
+    "instance_id": "pytest-dev__pytest-7236",
+    "repo": "pytest-dev/pytest",
+    "base_commit": "5cd723b",
+    "created_at": "2023-08-20T16:30:00Z",
+    "problem_statement": "unittest.TestCase tearDown execution skipped if setUp raises SkipTest exception in runner.py pytest_runtest_makereport.",
+    "hints_text": "Runner should ensure fixture teardown and TestCase.doCleanups still execute on skipped test setups in src/_pytest/unittest.py.",
+    "patch": "diff --git a/src/_pytest/unittest.py b/src/_pytest/unittest.py\n--- a/src/_pytest/unittest.py\n+++ b/src/_pytest/unittest.py\n@@ -212,6 +212,9 @@ class TestCaseFunction(Function):\n+        if getattr(self._testcase, \"_cleanups\", None):\n+            self._testcase.doCleanups()\ndiff --git a/src/_pytest/runner.py b/src/_pytest/runner.py\n--- a/src/_pytest/runner.py\n+++ b/src/_pytest/runner.py\n@@ -298,3 +298,6 @@ def pytest_runtest_setup(item):\n",
+    "gold_files": [
+      "src/_pytest/unittest.py",
+      "src/_pytest/runner.py"
+    ]
+  },
+  {
+    "instance_id": "scikit-learn__scikit-learn-13439",
+    "repo": "scikit-learn/scikit-learn",
+    "base_commit": "0de51bb",
+    "created_at": "2023-09-05T09:12:00Z",
+    "problem_statement": "Pipeline length inspection with len(pipeline) fails when steps are provided as tuple or dictionary in sklearn/pipeline.py.",
+    "hints_text": "Implement __len__ in Pipeline class in sklearn/pipeline.py returning len(self.steps).",
+    "patch": "diff --git a/sklearn/pipeline.py b/sklearn/pipeline.py\n--- a/sklearn/pipeline.py\n+++ b/sklearn/pipeline.py\n@@ -135,4 +135,7 @@ class Pipeline(_BaseComposition):\n+    def __len__(self):\n+        return len(self.steps)\n",
+    "test_patch": "diff --git a/sklearn/tests/test_pipeline.py b/sklearn/tests/test_pipeline.py\n",
+    "gold_files": [
+      "sklearn/pipeline.py"
+    ]
+  }
+]
