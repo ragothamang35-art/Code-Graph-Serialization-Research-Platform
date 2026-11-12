@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { OverviewTab } from './components/OverviewTab';
+import { EnhancementsTab } from './components/EnhancementsTab';
 import { ComparatorTab } from './components/ComparatorTab';
 import { ExperimentTab } from './components/ExperimentTab';
 import { StatisticsTab } from './components/StatisticsTab';
@@ -60,6 +61,8 @@ export default function App() {
         {activeTab === 'overview' && (
           <OverviewTab onSelectTab={setActiveTab} status={status} />
         )}
+
+        {activeTab === 'enhancements' && <EnhancementsTab />}
 
         {activeTab === 'comparator' && (
           <ComparatorTab tasks={tasks} onTestTaskFormat={handleTestTaskFormat} />

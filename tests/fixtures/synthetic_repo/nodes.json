@@ -1,0 +1,107 @@
+[
+  {
+    "id": "syn_node_service",
+    "name": "PaymentService",
+    "text": "Handles checkout lifecycle and charges client.",
+    "file": "pkg/service.py",
+    "line": 20
+  },
+  {
+    "id": "syn_node_client",
+    "name": "ClientTransport",
+    "text": "Raw TCP/HTTP socket transport with reconnect.",
+    "file": "pkg/client.py",
+    "line": 35
+  },
+  {
+    "id": "syn_node_validator",
+    "name": "InvoiceValidator",
+    "text": "Validates invoice lines and currency codes.",
+    "file": "pkg/validator.py",
+    "line": 50
+  },
+  {
+    "id": "syn_node_auth_validate",
+    "name": "validate_token",
+    "text": "Verifies JWT or opaque auth bearer token.",
+    "file": "pkg/auth.py",
+    "line": 50
+  },
+  {
+    "id": "syn_node_auth_jwt",
+    "name": "decode_jwt_header",
+    "text": "Extracts algorithm and kid from token header.",
+    "file": "pkg/auth.py",
+    "line": 15
+  },
+  {
+    "id": "syn_node_session_engine",
+    "name": "SessionEngine",
+    "text": "Manages cookie sessions and storage persistence.",
+    "file": "pkg/session.py",
+    "line": 10
+  },
+  {
+    "id": "syn_node_session_cookie",
+    "name": "CookieSerializer",
+    "text": "Encrypts and serializes session cookie payloads.",
+    "file": "pkg/session.py",
+    "line": 80
+  },
+  {
+    "id": "syn_node_controller",
+    "name": "Controller.invoke",
+    "text": "Accepts HTTP request and resolves route match.",
+    "file": "pkg/controller.py",
+    "line": 25
+  },
+  {
+    "id": "syn_node_router",
+    "name": "Router.dispatch",
+    "text": "Matches regex URL path against registered routes.",
+    "file": "pkg/router.py",
+    "line": 70
+  },
+  {
+    "id": "syn_node_handler",
+    "name": "handle_request",
+    "text": "Executes user handler function with context.",
+    "file": "pkg/handler.py",
+    "line": 40
+  },
+  {
+    "id": "syn_node_config",
+    "name": "AppConfig.load",
+    "text": "Loads YAML config into typed environment schema.",
+    "file": "pkg/config.py",
+    "line": 12
+  },
+  {
+    "id": "syn_node_logger",
+    "name": "Logger.info",
+    "text": "Emits structured JSON log lines to standard out.",
+    "file": "pkg/logger.py",
+    "line": 60
+  },
+  {
+    "id": "syn_node_metrics",
+    "name": "RequestMetrics.record",
+    "text": "Records request latency histograms.",
+    "file": "pkg/metrics.py",
+    "line": 5
+  },
+  {
+    "id": "syn_node_crypto",
+    "name": "AESGCM.encrypt",
+    "text": "Performs authenticated encryption with associated data.",
+    "file": "pkg/crypto.py",
+    "line": 90
+  },
+  {
+    "id": "syn_node_database",
+    "name": "DatabasePool.acquire",
+    "text": "Checks out pooled connection from database cluster.",
+    "file": "pkg/database.py",
+    "line": 110
+  }
+]

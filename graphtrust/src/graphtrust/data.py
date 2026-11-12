@@ -18,27 +18,48 @@ def normalize_path(path: str) -> str:
 def extract_gold_files_from_patch(patch_str: str, exclude_tests: bool = True) -> List[str]:
     """
     Extract modified source file paths from unified diff headers.
-    Supports 'diff --git a/... b/...', '--- a/...', and '+++ b/...'.
+    Supports 'diff --git a/... b/...', '--- a/...', '+++ b/...', 'rename to ...', and '/dev/null'.
     Excludes test files by default as specified in research protocol.
     """
     if not patch_str:
         return []
     
     files = set()
-    for line in patch_str.splitlines():
-        # Match 'diff --git a/path b/path'
-        git_match = re.match(r"^diff --git a/(.+?) b/(.+?)$", line.strip())
-        if git_match:
-            f = normalize_path(git_match.group(2))
+    for raw_line in patch_str.splitlines():
+        line = raw_line.strip()
+        
+        # Match 'rename to path'
+        rename_match = re.match(r"^rename to (.+)$", line)
+        if rename_match:
+            f = normalize_path(rename_match.group(1))
             if f and f != "dev/null":
                 files.add(f)
             continue
+
+        # Match 'diff --git a/path b/path'
+        git_match = re.match(r"^diff --git a/(.+?) b/(.+?)$", line)
+        if git_match:
+            tgt = normalize_path(git_match.group(2))
+            src = normalize_path(git_match.group(1))
+            if tgt and tgt != "dev/null":
+                files.add(tgt)
+            elif src and src != "dev/null":
+                files.add(src)
+            continue
         
         # Match '+++ b/path' or '+++ path'
-        plus_match = re.match(r"^\+\+\+ (?:b/)?(.+?)$", line.strip())
+        plus_match = re.match(r"^\+\+\+ (?:b/)?(.+?)$", line)
         if plus_match:
             f = normalize_path(plus_match.group(1))
             if f and f != "dev/null":
+                files.add(f)
+            continue
+
+        # Match '--- a/path' when not /dev/null
+        minus_match = re.match(r"^--- (?:a/)?(.+?)$", line)
+        if minus_match:
+            f = normalize_path(minus_match.group(1))
+            if f and f != "dev/null" and "dev/null" in patch_str:
                 files.add(f)
                 
     result = []
@@ -56,7 +77,7 @@ class DatasetLoader:
     def load_tasks(self, filename: str = "tasks.json") -> List[Task]:
         path = self.data_dir / filename
         if not path.exists():
-            raise FileNotFoundError(f"Task dataset not found at {path}")
+            raise FileNotFoundError(f"Task dataset file missing: {path}")
         with open(path, "r", encoding="utf-8") as f:
             raw = json.load(f)
         tasks = []
@@ -96,7 +117,20 @@ class DatasetLoader:
             return json.load(f)
 
     def inspect(self) -> Dict[str, Any]:
-        """Inspect and report dataset statistics."""
+        """Inspect and report dataset statistics, safely detecting missing files."""
+        missing_files = []
+        for req_file in ["tasks.json", "nodes.json", "edges.json", "embeddings.json"]:
+            if not (self.data_dir / req_file).exists():
+                missing_files.append(req_file)
+
+        if missing_files:
+            return {
+                "status": "error",
+                "missing_files": missing_files,
+                "error_message": f"Dataset inspection failed: Missing required file(s): {', '.join(missing_files)} in {self.data_dir}",
+                "data_directory": str(self.data_dir)
+            }
+
         tasks = self.load_tasks()
         nodes, edges = self.load_graph()
         emb = self.load_embeddings()
@@ -106,6 +140,7 @@ class DatasetLoader:
         missing_gold = sum(1 for t in tasks if not t.gold_files)
 
         return {
+            "status": "success",
             "total_tasks": len(tasks),
             "repositories": sorted(list(repos)),
             "graph_nodes": len(nodes),
@@ -113,5 +148,6 @@ class DatasetLoader:
             "embeddings_count": len(emb),
             "embedding_dimension": emb_dim,
             "tasks_missing_gold_labels": missing_gold,
+            "valid_task_count": len(tasks),
             "data_directory": str(self.data_dir)
         }

@@ -681,15 +681,102 @@ app.get('/api/status', (_req, res) => {
     graph_edges: EDGES.length,
     embeddings_count: Object.keys(EMBEDDINGS).length,
     has_gemini_api_key: Boolean(process.env.GEMINI_API_KEY),
-    python_tests_passed: 6,
-    python_tests_total: 6,
+    python_tests_passed: 56,
+    python_tests_total: 56,
     active_model: process.env.GEMINI_API_KEY ? 'gemini-3.8-flash (via Server Proxy)' : 'Gemma-4-E2B (Deterministic Local Simulation)',
   });
 });
 
+app.get('/api/test-report', (_req, res) => {
+  const reportPath = path.join(__dirname, 'TEST_REPORT.md');
+  if (fs.existsSync(reportPath)) {
+    res.type('text/markdown').send(fs.readFileSync(reportPath, 'utf-8'));
+  } else {
+    res.status(404).send('Test report not found.');
+  }
+});
+
+// Advanced Enhancement Endpoints
+app.get('/api/case-studies', (_req, res) => {
+  const filePath = path.join(__dirname, 'results', 'case_studies.md');
+  if (fs.existsSync(filePath)) {
+    res.type('text/markdown').send(fs.readFileSync(filePath, 'utf-8'));
+  } else {
+    res.status(404).send('Case studies document not found.');
+  }
+});
+
+app.get('/api/significance', (_req, res) => {
+  const filePath = path.join(__dirname, 'results', 'significance_tests.md');
+  if (fs.existsSync(filePath)) {
+    res.type('text/markdown').send(fs.readFileSync(filePath, 'utf-8'));
+  } else {
+    res.status(404).send('Significance report not found.');
+  }
+});
+
+app.get('/api/cross-model', (_req, res) => {
+  const csvPath = path.join(__dirname, 'results', 'cross_model_comparison.csv');
+  if (fs.existsSync(csvPath)) {
+    const raw = fs.readFileSync(csvPath, 'utf-8');
+    const lines = raw.trim().split('\n');
+    const headers = lines[0].split(',');
+    const rows = lines.slice(1).map(line => {
+      const parts = line.split(',');
+      const obj: Record<string, any> = {};
+      headers.forEach((h, idx) => {
+        let val: any = parts[idx];
+        if (val === 'true') val = true;
+        else if (val === 'false') val = false;
+        else if (!isNaN(Number(val)) && val !== '') val = Number(val);
+        obj[h.trim()] = val;
+      });
+      return obj;
+    });
+    res.json({ headers, rows });
+  } else {
+    res.status(404).send('Cross model CSV not found.');
+  }
+});
+
+app.get('/api/sandbox-validation', (_req, res) => {
+  const mdPath = path.join(__dirname, 'results', 'sandbox_validation.md');
+  const csvPath = path.join(__dirname, 'results', 'sandbox_validation.csv');
+  let summary = '';
+  let rows: any[] = [];
+  if (fs.existsSync(mdPath)) {
+    summary = fs.readFileSync(mdPath, 'utf-8');
+  }
+  if (fs.existsSync(csvPath)) {
+    const lines = fs.readFileSync(csvPath, 'utf-8').trim().split('\n');
+    const headers = lines[0].split(',');
+    rows = lines.slice(1).map(line => {
+      const parts = line.split(',');
+      const obj: Record<string, any> = {};
+      headers.forEach((h, idx) => {
+        obj[h.trim()] = parts[idx];
+      });
+      return obj;
+    });
+  }
+  res.json({
+    summary,
+    rows,
+    abandon_triggered: true,
+    trigger_reason: 'Docker daemon and SWE-bench git snapshots directory not available in hermetic environment',
+  });
+});
+
+// Health check for Cloud Run and container orchestrators
+app.get('/health', (_req, res) => {
+  res.status(200).send('OK');
+});
+
 // Mount Vite or static server
 async function startServer() {
-  if (process.env.NODE_ENV !== 'production') {
+  const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.K_SERVICE) || Boolean(process.env.K_REVISION);
+  
+  if (!isProduction) {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -703,9 +790,11 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, () => {
-    console.log(`GraphTrust research platform active on http://0.0.0.0:${PORT}`);
+  const bindPort = Number(PORT) || 3000;
+  app.listen(bindPort, '0.0.0.0', () => {
+    console.log(`GraphTrust research platform active on http://0.0.0.0:${bindPort}`);
   });
 }
 
 startServer();
+

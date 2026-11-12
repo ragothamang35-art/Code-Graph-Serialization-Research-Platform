@@ -1,0 +1,13 @@
+task_id,repo,format,budget,seed,candidate_coverage,correct_at1,correct_at3,correct_at5,token_count,latency_ms,mode
+task_01,repo_a,raw_json,512,42,1.0,false,true,true,510,120,mock
+task_01,repo_a,adjacency_list,512,42,1.0,true,true,true,300,90,mock
+task_01,repo_a,nl_sentences,512,42,1.0,true,true,true,310,95,mock
+task_02,repo_a,raw_json,512,42,1.0,true,true,true,480,110,mock
+task_02,repo_a,adjacency_list,512,42,1.0,true,true,true,290,85,mock
+task_02,repo_a,nl_sentences,512,42,1.0,true,true,true,295,88,mock
+task_03,repo_b,raw_json,512,42,1.0,false,false,false,512,130,mock
+task_03,repo_b,adjacency_list,512,42,1.0,false,false,false,310,92,mock
+task_03,repo_b,nl_sentences,512,42,1.0,false,false,false,315,96,mock
+task_04,repo_b,raw_json,512,42,1.0,false,true,true,505,125,mock
+task_04,repo_b,adjacency_list,512,42,1.0,true,true,true,280,80,mock
+task_04,repo_b,nl_sentences,512,42,1.0,false,true,true,290,85,mock

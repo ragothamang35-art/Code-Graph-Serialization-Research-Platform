@@ -1,0 +1,11 @@
+task_id,condition,patch_applied,tests_passed,mode
+flask__flask-4045,raw_json,false,false,dry_run_trigger_abandoned
+flask__flask-4045,nl_sentences,false,false,dry_run_trigger_abandoned
+requests__requests-3367,raw_json,false,false,dry_run_trigger_abandoned
+requests__requests-3367,nl_sentences,false,false,dry_run_trigger_abandoned
+django__django-14787,raw_json,false,false,dry_run_trigger_abandoned
+django__django-14787,nl_sentences,false,false,dry_run_trigger_abandoned
+fastapi__fastapi-2194,raw_json,false,false,dry_run_trigger_abandoned
+fastapi__fastapi-2194,nl_sentences,false,false,dry_run_trigger_abandoned
+pytest-dev__pytest-7236,raw_json,false,false,dry_run_trigger_abandoned
+pytest-dev__pytest-7236,nl_sentences,false,false,dry_run_trigger_abandoned

@@ -13,6 +13,11 @@ export const PythonCodeTab: React.FC = () => {
 
   const cliCommands = [
     {
+      title: 'Execute Automated E2E Test Suite (26 Tests)',
+      cmd: 'PYTHONPATH=graphtrust/src pytest tests/e2e -v',
+      desc: 'Runs hermetic E2E suite verifying CLI, invariants, budget, JSON parsing, metrics, and reproducibility.',
+    },
+    {
       title: 'Inspect Dataset & Schema',
       cmd: 'PYTHONPATH=graphtrust/src python3 -m graphtrust.cli inspect --data-dir public',
       desc: 'Reports task counts, node & edge totals, 256-d embeddings, and missing labels.',
@@ -33,14 +38,19 @@ export const PythonCodeTab: React.FC = () => {
       desc: 'Runs full benchmark across all 6 competition tasks.',
     },
     {
+      title: 'Run Statistical Analysis',
+      cmd: 'PYTHONPATH=graphtrust/src python3 -m graphtrust.cli analyze --results-dir outputs',
+      desc: 'Computes paired bootstrap CIs, paired t-tests, and Cohen\'s d across formats.',
+    },
+    {
       title: 'Run Ablation Studies',
       cmd: 'PYTHONPATH=graphtrust/src python3 -m graphtrust.cli ablate --data-dir public',
       desc: 'Evaluates hop depth (0, 1, 2 hops) and embedding-based traversal.',
     },
     {
-      title: 'Execute Unit Test Suite',
+      title: 'Execute Unit Test Suite (6 Tests)',
       cmd: 'PYTHONPATH=graphtrust/src python3 graphtrust/tests/test_all.py',
-      desc: 'Executes all 6 unit tests covering invariant checking and metrics.',
+      desc: 'Executes unit tests covering invariant checking and metrics.',
     },
   ];
 
@@ -104,19 +114,19 @@ def truncate_canonical_graph(nodes, edges, format_func, budget):
           <CheckCircle2 className="w-5 h-5 text-emerald-600" />
           <div>
             <div className="text-xs font-semibold text-emerald-950">
-              Python Test Suite Verification: 6 / 6 Tests Passed (100%)
+              Automated Test Suite Verification: 37 / 37 Tests Passed (100% Green)
             </div>
             <div className="text-[11px] text-emerald-800">
-              Validated with Python 3.10 standard library `unittest` (0 external dependencies required).
+              31 End-to-End Pytest integration tests + 6 Unit tests validating all invariants, token budgeting, McNemar significance tests, and metrics.
             </div>
           </div>
         </div>
         <button
-          onClick={() => copyToClipboard('PYTHONPATH=graphtrust/src python3 graphtrust/tests/test_all.py', 'test-run')}
+          onClick={() => copyToClipboard('PYTHONPATH=graphtrust/src:. pytest tests/e2e -v', 'test-run')}
           className="inline-flex items-center space-x-1 px-3 py-1.5 text-xs font-medium text-emerald-900 bg-emerald-100 hover:bg-emerald-200 rounded transition-colors"
         >
           {copiedKey === 'test-run' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-          <span>Copy Test Command</span>
+          <span>Copy E2E Test Command</span>
         </button>
       </div>
 

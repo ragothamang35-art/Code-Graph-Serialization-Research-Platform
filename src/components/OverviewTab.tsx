@@ -34,13 +34,22 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onSelectTab, status })
             <span>·</span>
             <span>Context Budgets: <strong className="text-slate-800 font-medium">512 – 4096 tokens</strong></span>
           </div>
-          <button
-            onClick={() => onSelectTab('comparator')}
-            className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
-          >
-            <span>Explore Subgraph Comparator</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => onSelectTab('enhancements')}
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-colors"
+            >
+              <span>Advanced Features (§1–§4)</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => onSelectTab('comparator')}
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+            >
+              <span>Explore Subgraph Comparator</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
 

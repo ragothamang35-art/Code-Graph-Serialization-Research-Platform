@@ -1,0 +1,9 @@
+task_id,repo,model,format,budget,seed,candidate_coverage,correct_at1,correct_at3,correct_at5,token_count,latency_ms,mode
+task_01,repo_a,Model_A,raw_json,512,42,1.0,false,false,false,510,120,mock
+task_01,repo_a,Model_A,nl_sentences,512,42,1.0,true,true,true,310,90,mock
+task_02,repo_a,Model_A,raw_json,512,42,1.0,false,true,true,500,115,mock
+task_02,repo_a,Model_A,nl_sentences,512,42,1.0,true,true,true,305,88,mock
+task_01,repo_a,Model_B,raw_json,512,42,1.0,true,true,true,510,118,mock
+task_01,repo_a,Model_B,nl_sentences,512,42,1.0,false,false,false,310,92,mock
+task_02,repo_a,Model_B,raw_json,512,42,1.0,true,true,true,500,112,mock
+task_02,repo_a,Model_B,nl_sentences,512,42,1.0,false,false,true,305,85,mock

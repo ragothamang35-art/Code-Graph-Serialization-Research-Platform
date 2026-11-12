@@ -1,0 +1,44 @@
+# GraphTrust E2E Test Configuration (Hermetic & Deterministic)
+project:
+  name: "GraphTrust-E2E"
+  version: "0.1.0-test"
+
+data:
+  data_dir: "tests/fixtures/synthetic_repo"
+  tasks_file: "tasks.json"
+  nodes_file: "nodes.json"
+  edges_file: "edges.json"
+  embeddings_file: "embeddings.json"
+
+retrieval:
+  max_depth: 2
+  use_embeddings: true
+  top_k_embedding_nodes: 2
+  embedding_sim_threshold: 0.4
+  max_total_nodes: 12
+
+serialization:
+  formats:
+    - "json"
+    - "adjacency_list"
+    - "natural_language"
+  baselines:
+    - "no_graph"
+    - "keyword_match"
+  token_budgets:
+    - 128
+    - 256
+    - 512
+    - 1024
+
+model:
+  name: "Gemma-4-E2B-MOCK"
+  mode: "mock"
+  is_mock: true
+  temperature: 0.0
+  context_window: 2048
+
+output:
+  dir: "outputs/e2e_test_scratch"
+  save_predictions: true
+  save_metrics: true

@@ -1,0 +1,95 @@
+[
+  {
+    "instance_id": "syn__task-001-standard",
+    "repo": "synthetic/web-framework",
+    "base_commit": "a1b2c3d",
+    "created_at": "2024-01-10T12:00:00Z",
+    "problem_statement": "PaymentService fails to invoke ClientTransport retry on connection timeout in pkg/service.py and pkg/client.py.",
+    "hints_text": "Check retry loop in pkg/client.py line 40 and service.py line 25.",
+    "patch": "diff --git a/pkg/service.py b/pkg/service.py\n--- a/pkg/service.py\n+++ b/pkg/service.py\n@@ -25,3 +25,5 @@ class PaymentService:\n+        if timeout:\n+            self.transport.retry()\ndiff --git a/pkg/client.py b/pkg/client.py\n--- a/pkg/client.py\n+++ b/pkg/client.py\n@@ -40,2 +40,4 @@ class ClientTransport:\n+    def retry(self):\n+        return self.connect()\n",
+    "test_patch": "diff --git a/tests/test_service.py b/tests/test_service.py\n",
+    "gold_files": [
+      "pkg/service.py",
+      "pkg/client.py"
+    ]
+  },
+  {
+    "instance_id": "syn__task-002-triple-plus-prefix",
+    "repo": "synthetic/web-framework",
+    "base_commit": "b2c3d4e",
+    "created_at": "2024-01-11T14:30:00Z",
+    "problem_statement": "Authentication token validation crashes when token header is empty in pkg/auth.py.",
+    "hints_text": "Verify token length before decode.",
+    "patch": "--- a/pkg/auth.py\n+++ b/pkg/auth.py\n@@ -55,3 +55,5 @@ def validate_token(token):\n+    if not token:\n+        return False\n",
+    "test_patch": "",
+    "gold_files": [
+      "pkg/auth.py"
+    ]
+  },
+  {
+    "instance_id": "syn__task-003-new-file-dev-null",
+    "repo": "synthetic/web-framework",
+    "base_commit": "c3d4e5f",
+    "created_at": "2024-01-12T09:15:00Z",
+    "problem_statement": "Add missing telemetry metrics collection module for tracking request durations in pkg/metrics.py.",
+    "hints_text": "Create pkg/metrics.py with Timer collector.",
+    "patch": "diff --git a/dev/null b/pkg/metrics.py\n--- /dev/null\n+++ b/pkg/metrics.py\n@@ -0,0 +1,6 @@\n+class RequestMetrics:\n+    def record(self, duration):\n+        pass\n",
+    "test_patch": "",
+    "gold_files": [
+      "pkg/metrics.py"
+    ]
+  },
+  {
+    "instance_id": "syn__task-004-rename-diff",
+    "repo": "synthetic/web-framework",
+    "base_commit": "d4e5f6a",
+    "created_at": "2024-01-13T16:00:00Z",
+    "problem_statement": "Deprecate legacy session store and rename to modern session engine in pkg/session.py.",
+    "hints_text": "Renamed from pkg/old_session.py to pkg/session.py.",
+    "patch": "diff --git a/pkg/old_session.py b/pkg/session.py\nsimilarity index 98%\nrename from pkg/old_session.py\nrename to pkg/session.py\n--- a/pkg/old_session.py\n+++ b/pkg/session.py\n@@ -10,3 +10,4 @@ class SessionEngine:\n+    active = True\n",
+    "test_patch": "",
+    "gold_files": [
+      "pkg/session.py"
+    ]
+  },
+  {
+    "instance_id": "syn__task-005-test-exclusion",
+    "repo": "synthetic/web-framework",
+    "base_commit": "e5f6a7b",
+    "created_at": "2024-01-14T11:20:00Z",
+    "problem_statement": "Fix NullPointerException in Router dispatch method in pkg/router.py while adding test coverage in tests/test_router.py.",
+    "hints_text": "Router should guard against None route.",
+    "patch": "diff --git a/pkg/router.py b/pkg/router.py\n--- a/pkg/router.py\n+++ b/pkg/router.py\n@@ -75,3 +75,5 @@ def dispatch(route):\n+    if route is None:\n+        raise ValueError(\"Invalid route\")\ndiff --git a/tests/test_router.py b/tests/test_router.py\n--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -10,2 +10,4 @@ def test_null_route():\n",
+    "test_patch": "",
+    "gold_files": [
+      "pkg/router.py"
+    ]
+  },
+  {
+    "instance_id": "syn__task-006-unretrievable-gold",
+    "repo": "synthetic/web-framework",
+    "base_commit": "f6a7b8c",
+    "created_at": "2024-01-15T08:45:00Z",
+    "problem_statement": "Fix isolated external third-party plugin loader in pkg/isolated_plugin.py when external manifest is corrupt.",
+    "hints_text": "Manifest parser in isolated_plugin.py requires safety check.",
+    "patch": "diff --git a/pkg/isolated_plugin.py b/pkg/isolated_plugin.py\n--- a/pkg/isolated_plugin.py\n+++ b/pkg/isolated_plugin.py\n@@ -15,3 +15,5 @@ def load_manifest():\n+    if not os.path.exists(path):\n+        return {}\n",
+    "test_patch": "",
+    "gold_files": [
+      "pkg/isolated_plugin.py"
+    ]
+  },
+  {
+    "instance_id": "syn__task-007-deep-traversal",
+    "repo": "synthetic/web-framework",
+    "base_commit": "a7b8c9d",
+    "created_at": "2024-01-16T15:10:00Z",
+    "problem_statement": "Propagate trace context from Controller through Router to Handler in pkg/controller.py and pkg/handler.py.",
+    "hints_text": "Ensure request.trace_id reaches handler execution.",
+    "patch": "diff --git a/pkg/controller.py b/pkg/controller.py\n--- a/pkg/controller.py\n+++ b/pkg/controller.py\n@@ -30,2 +30,4 @@ class Controller:\n+        ctx = make_trace_context()\ndiff --git a/pkg/handler.py b/pkg/handler.py\n--- a/pkg/handler.py\n+++ b/pkg/handler.py\n@@ -45,2 +45,4 @@ def handle_request(ctx):\n+    logger.info(ctx.trace_id)\n",
+    "test_patch": "",
+    "gold_files": [
+      "pkg/controller.py",
+      "pkg/handler.py"
+    ]
+  }
+]

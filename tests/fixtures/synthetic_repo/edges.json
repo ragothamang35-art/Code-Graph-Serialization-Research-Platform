@@ -1,0 +1,62 @@
+[
+  {
+    "source": "syn_node_service",
+    "target": "syn_node_client",
+    "type": "calls"
+  },
+  {
+    "source": "syn_node_service",
+    "target": "syn_node_validator",
+    "type": "validates"
+  },
+  {
+    "source": "syn_node_client",
+    "target": "syn_node_logger",
+    "type": "logs_to"
+  },
+  {
+    "source": "syn_node_auth_validate",
+    "target": "syn_node_auth_jwt",
+    "type": "calls"
+  },
+  {
+    "source": "syn_node_auth_validate",
+    "target": "syn_node_crypto",
+    "type": "uses_crypto"
+  },
+  {
+    "source": "syn_node_session_engine",
+    "target": "syn_node_session_cookie",
+    "type": "delegates"
+  },
+  {
+    "source": "syn_node_session_cookie",
+    "target": "syn_node_crypto",
+    "type": "encrypts_with"
+  },
+  {
+    "source": "syn_node_controller",
+    "target": "syn_node_router",
+    "type": "dispatches_to"
+  },
+  {
+    "source": "syn_node_router",
+    "target": "syn_node_handler",
+    "type": "routes_to"
+  },
+  {
+    "source": "syn_node_handler",
+    "target": "syn_node_database",
+    "type": "queries"
+  },
+  {
+    "source": "syn_node_handler",
+    "target": "syn_node_metrics",
+    "type": "emits_metrics"
+  },
+  {
+    "source": "syn_node_controller",
+    "target": "syn_node_config",
+    "type": "reads_config"
+  }
+]

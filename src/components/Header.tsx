@@ -1,5 +1,5 @@
 import React from 'react';
-import { Network, Terminal, BookOpen, BarChart3, Database, Layers, Play } from 'lucide-react';
+import { Network, Terminal, BookOpen, BarChart3, Database, Layers, Play, Sparkles } from 'lucide-react';
 import { SystemStatus } from '../types';
 
 interface HeaderProps {
@@ -11,6 +11,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, status }) => {
   const tabs = [
     { id: 'overview', label: 'Overview', icon: BookOpen },
+    { id: 'enhancements', label: 'Advanced Features (§1–§4)', icon: Sparkles },
     { id: 'comparator', label: 'Graph & Formats', icon: Network },
     { id: 'experiment', label: 'Experiment Runner', icon: Play },
     { id: 'statistics', label: 'Statistical Analysis', icon: BarChart3 },
